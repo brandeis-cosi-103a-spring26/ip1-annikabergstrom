@@ -4,5 +4,5 @@ Builds a dice game that
 * On each player's turn, one six-sided die is rolled for them 
 * The player can choose to re-roll the die up to 2 times
 * Once the player chooses to end their turn, the value of the die is added to their score
-* Each player shpould get 10 turns
+* Each player should get 10 turns
 * At the end of the game, the player with the most points wins
