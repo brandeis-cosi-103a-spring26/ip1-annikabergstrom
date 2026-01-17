@@ -5,4 +5,4 @@ Builds a dice game that
 * The player can choose to re-roll the die up to 2 times
 * Once the player chooses to end their turn, the value of the die is added to their score
 * Each player shpould get 10 turns
-* At the edn of the game, the player with the most points wins
+* At the end of the game, the player with the most points wins
