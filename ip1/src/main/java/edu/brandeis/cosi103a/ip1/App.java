@@ -8,66 +8,92 @@ public class App {
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
+        int[] scores = playGame(rand, in, 10);
         String[] players = {"Player 1", "Player 2"};
-        int[] scores = {0, 0};
-        final int TURNS = 10;
-
-        System.out.println("Two-player Dice Game");
-        System.out.println("Each player has " + TURNS + " turns. On your turn you roll one 6-sided die.");
-        System.out.println("You may reroll up to 2 times. When you end your turn, the die value is added to your score.");
-        System.out.println("Enter 'r' to reroll, or 'e' to end and keep the current value.");
-        System.out.println();
-
-        for (int turn = 1; turn <= TURNS; turn++) {
-            for (int p = 0; p < players.length; p++) {
-                System.out.println("--- " + players[p] + " - Turn " + turn + " ---");
-                int rerollsLeft = 2;
-                int value = rollDie(rand);
-                System.out.println("Rolled: " + value + ". Rerolls left: " + rerollsLeft);
-
-                while (rerollsLeft > 0) {
-                    System.out.print("(r = reroll, e = end) > ");
-                    String line = in.nextLine().trim().toLowerCase();
-                    if (line.isEmpty()) {
-                        continue;
-                    }
-                    char cmd = line.charAt(0);
-                    if (cmd == 'r') {
-                        value = rollDie(rand);
-                        rerollsLeft--;
-                        System.out.println("Rerolled: " + value + ". Rerolls left: " + rerollsLeft);
-                        if (rerollsLeft == 0) {
-                            System.out.println("No rerolls left. End turn to add " + value + " to your score.");
-                        }
-                    } else if (cmd == 'e') {
-                        break;
-                    } else {
-                        System.out.println("Unknown command. Enter 'r' or 'e'.");
-                    }
-                }
-
-                scores[p] += value;
-                System.out.println(players[p] + " gains " + value + " points. Total: " + scores[p]);
-                System.out.println();
-            }
-        }
-
-        System.out.println("=== Final Scores ===");
-        System.out.println(players[0] + ": " + scores[0]);
-        System.out.println(players[1] + ": " + scores[1]);
-
-        if (scores[0] > scores[1]) {
-            System.out.println(players[0] + " wins!");
-        } else if (scores[1] > scores[0]) {
-            System.out.println(players[1] + " wins!");
-        } else {
-            System.out.println("It's a tie!");
-        }
+        printFinalResults(scores, players);
 
         in.close();
     }
 
-    private static int rollDie(Random rand) {
+    public static int rollDie(Random rand) {
         return rand.nextInt(6) + 1;
+    }
+
+    public static int takeTurn(String playerName, Random rand, Scanner in, int rerollsAllowed) {
+        int rerollsLeft = rerollsAllowed;
+        int value = rollDie(rand);
+        System.out.println("Rolled: " + value + ". Rerolls left: " + rerollsLeft);
+
+        while (rerollsLeft > 0) {
+            System.out.print("(r = reroll, e = end) > ");
+            String line = in.nextLine().trim().toLowerCase();
+            if (line.isEmpty()) {
+                continue;
+            }
+            char cmd = line.charAt(0);
+            if (cmd == 'r') {
+                value = rollDie(rand);
+                rerollsLeft--;
+                System.out.println("Rerolled: " + value + ". Rerolls left: " + rerollsLeft);
+                if (rerollsLeft == 0) {
+                    System.out.println("No rerolls left. End turn to add " + value + " to your score.");
+                }
+            } else if (cmd == 'e') {
+                break;
+            } else {
+                System.out.println("Unknown command. Enter 'r' or 'e'.");
+            }
+        }
+
+        System.out.println(playerName + " gains " + value + " points.");
+        return value;
+    }
+
+    public static int[] playGame(Random rand, Scanner in, int turns) {
+        String[] players = {"Player 1", "Player 2"};
+        int[] scores = {0, 0};
+
+        System.out.println("Two-player Dice Game");
+        System.out.println("Each player has " + turns + " turns. On your turn you roll one 6-sided die.");
+        System.out.println("You may reroll up to 2 times. When you end your turn, the die value is added to your score.");
+        System.out.println("Enter 'r' to reroll, or 'e' to end and keep the current value.");
+        System.out.println();
+
+        for (int turn = 1; turn <= turns; turn++) {
+            for (int p = 0; p < players.length; p++) {
+                System.out.println("--- " + players[p] + " - Turn " + turn + " ---");
+                int gained = takeTurn(players[p], rand, in, 2);
+                scores[p] += gained;
+                System.out.println(players[p] + " Total: " + scores[p]);
+                System.out.println();
+            }
+        }
+
+        return scores;
+    }
+
+    public static int determineWinner(int[] scores) {
+        if (scores[0] > scores[1]) {
+            return 0;
+        } else if (scores[1] > scores[0]) {
+            return 1;
+        } else {
+            return -1; // tie
+        }
+    }
+
+    public static void printFinalResults(int[] scores, String[] players) {
+        System.out.println("=== Final Scores ===");
+        System.out.println(players[0] + ": " + scores[0]);
+        System.out.println(players[1] + ": " + scores[1]);
+
+        int winner = determineWinner(scores);
+        if (winner == 0) {
+            System.out.println(players[0] + " wins!");
+        } else if (winner == 1) {
+            System.out.println(players[1] + " wins!");
+        } else {
+            System.out.println("It's a tie!");
+        }
     }
 }
