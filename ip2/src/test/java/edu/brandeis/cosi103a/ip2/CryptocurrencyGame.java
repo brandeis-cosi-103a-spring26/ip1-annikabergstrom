@@ -6,9 +6,9 @@ import static org.junit.Assert.*;
 public class CryptocurrencyGame {
     @Test
     public void testCryptocurrencyCardCreation() {
-        CryptocurrencyCard card = new CryptocurrencyCard(10, 20, "Bitcoin");
-        assertEquals(10, card.getCost());
-        assertEquals(20, card.getValue());
-        assertEquals("Bitcoin", card.getType());
+        CryptocurrencyCard card = new CryptocurrencyCard(10, 20, 4);
+        assertEquals(10, card.getCount("Bitcoin"));
+        assertEquals(20, card.getCount("Ethereum"));
+        assertEquals(4, card.getCount("Dogecoin"));
     }
 }
