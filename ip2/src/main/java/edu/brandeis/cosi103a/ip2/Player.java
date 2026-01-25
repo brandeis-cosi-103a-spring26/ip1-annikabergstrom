@@ -1,3 +1,5 @@
+package edu.brandeis.cosi103a.ip2;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -62,6 +64,34 @@ public class Player {
 
         // transfer 5 cards from draw pile to hand
         drawCard(5);
+    }
+
+    public int playCryptocurrencies() {
+        int total = 0;
+        for (Card c : hand) {
+            if (c instanceof CryptocurrencyCard) {
+                total += c.getValue();
+            }
+        }
+        return total;
+    }
+
+    public void addToDiscard(Card c) {
+        if (c != null) discardPile.add(c);
+    }
+
+    public int totalAutomationPoints() {
+        int total = 0;
+        for (Card c : drawPile) {
+            if (c instanceof AutomationCard) total += c.getValue();
+        }
+        for (Card c : hand) {
+            if (c instanceof AutomationCard) total += c.getValue();
+        }
+        for (Card c : discardPile) {
+            if (c instanceof AutomationCard) total += c.getValue();
+        }
+        return total;
     }
 
     @Override

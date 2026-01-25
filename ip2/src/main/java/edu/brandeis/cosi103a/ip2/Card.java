@@ -1,3 +1,5 @@
+package edu.brandeis.cosi103a.ip2;
+
 public abstract class Card {
     private int cost;
     private int value;
