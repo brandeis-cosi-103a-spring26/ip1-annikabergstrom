@@ -43,7 +43,7 @@ public class PlayerTest {
     
     @Test
     public void testBuyPhaseReturnsCardName() {
-        String card = player.buyPhase(deck);
+        String card = player.buyPhase(deck, 1);
         // With starting hand, should be able to buy at least Bitcoin (free) or Method (2 coins)
         assertTrue(card != null);
     }
@@ -54,7 +54,7 @@ public class PlayerTest {
         
         // Try to buy multiple times
         for (int i = 0; i < 5; i++) {
-            player.buyPhase(deck);
+            player.buyPhase(deck, i + 1);
             player.cleanUp();
         }
         
@@ -99,7 +99,7 @@ public class PlayerTest {
     public void testMultipleBuyAndCleanupCycles() {
         int cycles = 10;
         for (int i = 0; i < cycles; i++) {
-            String card = player.buyPhase(deck);
+            String card = player.buyPhase(deck, i + 1);
             player.cleanUp();
         }
         
@@ -160,7 +160,7 @@ public class PlayerTest {
         }
         
         // Player should still be able to call buyPhase
-        String card = player.buyPhase(emptyStyleDeck);
+        String card = player.buyPhase(emptyStyleDeck, 1);
         // May or may not get a card depending on hand
         assertNotNull(card); // Should at least get Bitcoin (free)
     }
@@ -174,7 +174,7 @@ public class PlayerTest {
         assertEquals(p1.totalAutomationPoints(), p2.totalAutomationPoints());
         
         // Buy cards for p1
-        p1.buyPhase(deck);
+        p1.buyPhase(deck, 1);
         p1.cleanUp();
         
         // p2 should be unaffected

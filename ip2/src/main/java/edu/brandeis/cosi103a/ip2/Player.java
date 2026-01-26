@@ -40,8 +40,6 @@ public class Player {
 
     /**
      * Initializes the player's deck with starting cards.
-     * Creates the draw pile with 7 Bitcoin cards and 3 Method cards,
-     * shuffles it, and draws the initial hand of 5 cards.
      */
     private void initializePiles() {
         hand = new ArrayList<>();
@@ -62,8 +60,6 @@ public class Player {
 
     /**
      * Draws the specified number of cards from the draw pile to the hand.
-     * If the draw pile becomes empty, the discard pile is shuffled and becomes the new draw pile.
-     * 
      * @param num the number of cards to draw
      */
     private void drawCard(int num) {
@@ -72,15 +68,14 @@ public class Player {
             if (drawPile.isEmpty()) {
                 reshuffleDiscardIntoDraw();
             }
-            if (!drawPile.isEmpty()) { // TODO: do I need a separate if check here or can I just put line below as next line?
+            if (!drawPile.isEmpty()) { 
                 hand.add(drawPile.remove(drawPile.size() - 1));
             }
         }
     }
 
     /**
-     * Reshuffles the discard pile and adds all cards back to the draw pile.
-     * Clears the discard pile after transferring the cards.
+     * Reshuffles discard pile and adds all cards back to the draw pile.
      */
     private void reshuffleDiscardIntoDraw() {
         Collections.shuffle(discardPile);
@@ -89,9 +84,7 @@ public class Player {
     }
 
     /**
-     * Performs the cleanup phase of a turn.
-     * Discards all cards from the hand to the discard pile,
-     * then draws 5 new cards from the draw pile.
+     * Performs the cleanup phase of a turn (discard and draw new)
      */
     public void cleanUp() {
         // transfer all cards from hand (5) to discard pile
@@ -104,7 +97,6 @@ public class Player {
 
     /**
      * Calculates the total value of all cryptocurrency cards in the player's hand.
-     * 
      * @return the total coin value of cryptocurrency cards in hand
      */
     public int playCryptocurrencies() {
@@ -120,7 +112,6 @@ public class Player {
 
     /**
      * Adds a card to the discard pile.
-     * 
      * @param c the card to add to the discard pile (null values are ignored)
      */
     public void addToDiscard(Card c) {
@@ -128,9 +119,7 @@ public class Player {
     }
 
     /**
-     * Calculates the total Automation Points across all of the player's cards.
-     * Sums the values of all AutomationCard instances in the draw pile, hand, and discard pile.
-     * 
+     * Calculates the total Automation Points across all of the player's cards (hand, draw, discard)
      * @return the total Automation Points for determining the winner
      */
     public int totalAutomationPoints() {
@@ -158,18 +147,16 @@ public class Player {
 
     /**
      * Performs the buy phase of a turn.
-     * Calculates total available coins from cryptocurrency cards in hand,
-     * determines the best affordable card, purchases it, and adds it to the discard pile.
-     * 
      * @param deck the game deck from which to purchase cards
+     * @param roundNumber the current round number for strategy decisions
      * @return the name of the card purchased, or null if no purchase was made
      */
-    public String buyPhase(Deck deck) {
+    public String buyPhase(Deck deck, int roundNumber) {
         // Play all cryptocurrencies to get total coins
         int totalCoins = playCryptocurrencies();
         
         // Get best affordable card and buy it
-        String cardToBuy = deck.getBestAffordableCard(totalCoins);
+        String cardToBuy = deck.getBestAffordableCard(totalCoins, roundNumber);
         if (cardToBuy != null) {
             Card boughtCard = deck.buyCard(cardToBuy, totalCoins);
             if (boughtCard != null) {

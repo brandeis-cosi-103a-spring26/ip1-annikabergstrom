@@ -221,6 +221,115 @@ public class MainTest {
                    output.contains("\n\n"));
     }
     
+    @Test
+    public void testGamesAreNotIdentical() {
+        // Run multiple games and track various outcomes
+        int numGames = 20;
+        boolean player1StartedAtLeastOnce = false;
+        boolean player2StartedAtLeastOnce = false;
+        boolean player1WonAtLeastOnce = false;
+        boolean player2WonAtLeastOnce = false;
+        int[] finalScoreP1 = new int[numGames];
+        int[] finalScoreP2 = new int[numGames];
+        int[] roundCounts = new int[numGames];
+        
+        for (int i = 0; i < numGames; i++) {
+            outContent.reset();
+            Main.main(new String[]{});
+            String output = outContent.toString();
+            
+            // Track starting player
+            if (output.contains("Player 1 goes first")) {
+                player1StartedAtLeastOnce = true;
+            }
+            if (output.contains("Player 2 goes first")) {
+                player2StartedAtLeastOnce = true;
+            }
+            
+            // Track winner
+            if (output.contains("Player 1 wins!")) {
+                player1WonAtLeastOnce = true;
+            }
+            if (output.contains("Player 2 wins!")) {
+                player2WonAtLeastOnce = true;
+            }
+            
+            // Extract final scores and round count
+            String[] lines = output.split("\n");
+            for (String line : lines) {
+                if (line.contains("Player 1 total Automation Points:")) {
+                    String[] parts = line.split(":");
+                    if (parts.length > 1) {
+                        finalScoreP1[i] = Integer.parseInt(parts[1].trim());
+                    }
+                }
+                if (line.contains("Player 2 total Automation Points:")) {
+                    String[] parts = line.split(":");
+                    if (parts.length > 1) {
+                        finalScoreP2[i] = Integer.parseInt(parts[1].trim());
+                    }
+                }
+            }
+            
+            // Count rounds
+            for (int round = 1; round <= 100; round++) {
+                if (output.contains("ROUND " + round)) {
+                    roundCounts[i] = round;
+                }
+            }
+        }
+        
+        // Check for variation in starting player (should be roughly 50/50 with 20 games)
+        assertTrue("Player 1 should start at least once in " + numGames + " games", 
+                   player1StartedAtLeastOnce);
+        assertTrue("Player 2 should start at least once in " + numGames + " games", 
+                   player2StartedAtLeastOnce);
+        
+        // Check for variation in final scores
+        boolean scoresVary = false;
+        for (int i = 1; i < numGames; i++) {
+            if (finalScoreP1[i] != finalScoreP1[0] || finalScoreP2[i] != finalScoreP2[0]) {
+                scoresVary = true;
+                break;
+            }
+        }
+        assertTrue("Final scores should vary across different games (not all identical)", 
+                   scoresVary);
+        
+        // Check for variation in round counts
+        boolean roundCountsVary = false;
+        for (int i = 1; i < numGames; i++) {
+            if (roundCounts[i] != roundCounts[0]) {
+                roundCountsVary = true;
+                break;
+            }
+        }
+        assertTrue("Games should have different lengths (not all the same number of rounds)", 
+                   roundCountsVary);
+        
+        // Statistical check: at least 2 different outcomes are expected
+        // (extremely unlikely all games end identically due to shuffling and random start)
+        int uniqueOutcomes = 0;
+        for (int i = 0; i < numGames; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < i; j++) {
+                if (finalScoreP1[i] == finalScoreP1[j] && 
+                    finalScoreP2[i] == finalScoreP2[j] && 
+                    roundCounts[i] == roundCounts[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueOutcomes++;
+            }
+        }
+        
+        assertTrue("Should have at least 2 unique game outcomes in " + numGames + 
+                   " games (got " + uniqueOutcomes + " unique outcomes)", 
+                   uniqueOutcomes >= 2);
+    }
+    
     private int countOccurrences(String text, String pattern) {
         int count = 0;
         int index = 0;
