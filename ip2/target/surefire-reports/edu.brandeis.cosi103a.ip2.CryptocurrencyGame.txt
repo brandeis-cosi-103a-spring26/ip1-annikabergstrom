@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.brandeis.cosi103a.ip2.CryptocurrencyGame
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.1 s - in edu.brandeis.cosi103a.ip2.CryptocurrencyGame
