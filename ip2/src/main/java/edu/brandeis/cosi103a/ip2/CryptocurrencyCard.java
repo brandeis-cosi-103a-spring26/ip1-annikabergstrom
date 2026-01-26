@@ -3,6 +3,11 @@ package edu.brandeis.cosi103a.ip2;
 /**
  * Represents a cryptocurrency card in the cryptocurrency card game.
  * Cryptocurrency cards can be played to generate coins for purchasing other cards.
+ * Known Bugs: None
+ * @author Annika Bergstrom with GitHub Copilot
+ * annikabergstrom@brandeis.edu
+ * January 26, 2026
+ * COSI 103a IP2
  */
 public class CryptocurrencyCard {
     private int bitcoinNum;
