@@ -1,8 +1,12 @@
 package edu.brandeis.cosi103a.ip2;
 
 /**
- * Represents a card in the cryptocurrency card game.
- * All cards have a cost, value, and type.
+ * Represents a card in the cryptocurrency card game. All cards have a cost, value, and type.
+ * Known Bugs: None
+ * @author Annika Bergstrom with GitHub Copilot
+ * annikabergstrom@brandeis.edu
+ * January 26, 2026
+ * COSI 103a IP2
  */
 public class Card {
     private int cost;

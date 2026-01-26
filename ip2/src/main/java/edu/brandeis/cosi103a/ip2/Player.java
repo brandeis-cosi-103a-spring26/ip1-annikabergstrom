@@ -6,6 +6,11 @@ import java.util.Collections;
 /**
  * Represents a player in the cryptocurrency card game.
  * Each player has their own deck consisting of a draw pile, hand, and discard pile.
+ * Known Bugs: None
+ * @author Annika Bergstrom with GitHub Copilot
+ * annikabergstrom@brandeis.edu
+ * January 26, 2026
+ * COSI 103a IP2
  */
 public class Player {
     private int playerNumber;
@@ -23,6 +28,14 @@ public class Player {
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
         initializePiles();
+    }
+
+    /**
+     * Gets the player's number. Used in printing statistics in Main
+     * @return player number
+     */
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     /**

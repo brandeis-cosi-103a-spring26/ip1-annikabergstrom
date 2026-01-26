@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents the supply of purchasable cards in the cryptocurrency card game.
- * Manages the inventory of automation cards and cryptocurrency cards,
- * along with their costs and values.
+ * Represents the supply of purchasable cards. Manages the inventory of automation 
+ * cards and cryptocurrency cards, along with their costs and values.
+ * Known Bugs: None
+ * @author Annika Bergstrom with GitHub Copilot
+ * annikabergstrom@brandeis.edu
+ * January 26, 2026
+ * COSI 103a IP2
  */
 public class Deck {
     private AutomationCard automationCards;
