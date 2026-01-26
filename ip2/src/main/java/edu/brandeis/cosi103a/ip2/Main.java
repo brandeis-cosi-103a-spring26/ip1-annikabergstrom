@@ -2,13 +2,9 @@ package edu.brandeis.cosi103a.ip2;
 import java.util.Random;
 
 /**
- * Main class for running the cryptocurrency card game. Manages the game loop, alternating turns 
- * between two automated players, determining the winner based on total Automation Points.
- * Known Bugs: None
- * @author Annika Bergstrom with GitHub Copilot
- * annikabergstrom@brandeis.edu
- * January 26, 2026
- * COSI 103a IP2
+ * Main class for running the cryptocurrency card game.
+ * Manages the game loop, alternating turns between two automated players,
+ * and determining the winner based on total Automation Points.
  */
 public class Main {
     
@@ -33,33 +29,40 @@ public class Main {
             
             if (player1Starts) {
                 // Player 1's turn
-                String card1 = player1.buyPhase(decks);
+                String card1 = player1.buyPhase(decks, turnCount);
                 player1.cleanUp();
-                printLog(player1, card1);
-
+                System.out.println("-Player 1");
+                System.out.println("  ACTION: Bought " + (card1 != null ? card1 : "nothing"));
+                System.out.println("  STATUS: Total AP is now " + player1.totalAutomationPoints());
+                
                 if (decks.getNumberFrameworkCards() <= 0) {
                     break;
                 }
                 
                 // Player 2's turn
-                String card2 = player2.buyPhase(decks);
+                String card2 = player2.buyPhase(decks, turnCount);
                 player2.cleanUp();
-                printLog(player2, card2);
-
+                System.out.println("-Player 2");
+                System.out.println("  ACTION: Bought " + (card2 != null ? card2 : "nothing"));
+                System.out.println("  STATUS: Total AP is now " + player2.totalAutomationPoints());
             } else {
                 // Player 2's turn
-                String card2 = player2.buyPhase(decks);
+                String card2 = player2.buyPhase(decks, turnCount);
                 player2.cleanUp();
-                printLog(player2, card2);
+                System.out.println("-Player 2");
+                System.out.println("  ACTION: Bought " + (card2 != null ? card2 : "nothing"));
+                System.out.println("  STATUS: Total AP is now " + player2.totalAutomationPoints());
                 
                 if (decks.getNumberFrameworkCards() <= 0) {
                     break;
                 }
                 
                 // Player 1's turn
-                String card1 = player1.buyPhase(decks);
+                String card1 = player1.buyPhase(decks, turnCount);
                 player1.cleanUp();
-                printLog(player1, card1);
+                System.out.println("-Player 1");
+                System.out.println("  ACTION: Bought " + (card1 != null ? card1 : "nothing"));
+                System.out.println("  STATUS: Total AP is now " + player1.totalAutomationPoints());
             }
             System.out.println();
         }
@@ -79,16 +82,5 @@ public class Main {
         } else {
             System.out.println("\nIt's a tie!");
         }
-    }
-
-    /**
-     * Prints the log for a player's turn including action taken and current status. In a seperate function for clarity.
-     * @param player the player whose turn it is
-     * @param card card bought this turn, null if none
-     */
-    public static void printLog(Player player, String card) {
-        System.out.println("-Player " + player.getPlayerNumber());
-        System.out.println("  ACTION: Bought " + (card != null ? card : "nothing"));
-        System.out.println("  STATUS: Total AP is now " + player.totalAutomationPoints());
     }
 }

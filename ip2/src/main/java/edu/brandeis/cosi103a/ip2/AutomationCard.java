@@ -67,7 +67,7 @@ public class AutomationCard {
     }
     
     /**
-     * Returns the cost of the specified card type
+     * Returns the cost of the specified card type. If not valid, return -1
      * @param cardName String of card name
      * @return cost of the card type
      */
@@ -81,7 +81,7 @@ public class AutomationCard {
     }
     
     /**
-     * Returns the value of the specified card type
+     * Returns the value of the specified card type. If not valid, return -1
      * @param cardName String of card name
      * @return value of the card type
      */

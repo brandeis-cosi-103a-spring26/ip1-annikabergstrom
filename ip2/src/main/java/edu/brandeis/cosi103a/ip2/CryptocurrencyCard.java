@@ -14,12 +14,23 @@ public class CryptocurrencyCard {
     private int ethereumNum;
     private int dogecoinNum;
     
+    /**
+     * Creates a new CryptocurrencyCard with the specified properties.
+     * @param bitcoinNum Value or cost of Bitcoin cards
+     * @param ethereumNum Value or cost of Ethereum cards
+     * @param dogecoinNum Value or cost of Dogecoin cards
+     */
     public CryptocurrencyCard(int bitcoinNum, int ethereumNum, int dogecoinNum) {
         this.bitcoinNum = bitcoinNum;
         this.ethereumNum = ethereumNum;
         this.dogecoinNum = dogecoinNum;
     }
     
+    /**
+     * Gets the value or count of the specified card type
+     * @param cardName name of card type. "Bitcoin", "Ethereum", "Dogecoin"
+     * @return value or count of that card type . 0 else
+     */
     public int getCount(String cardName) {
         switch (cardName) {
             case "Bitcoin": return bitcoinNum;
@@ -29,6 +40,10 @@ public class CryptocurrencyCard {
         }
     }
     
+    /**
+     * Drecrements the count of the specified card type by 1
+     * @param cardName name of card type
+     */
     public void decrementCount(String cardName) {
         switch (cardName) {
             case "Bitcoin": 
@@ -43,6 +58,11 @@ public class CryptocurrencyCard {
         }
     }
     
+    /**
+     * Returns the cost of the specified card type. If not valid, return -1
+     * @param cardName String of card name
+     * @return cost of the card type
+     */
     public int getCost(String cardName) {
         switch (cardName) {
             case "Bitcoin": return 0;
@@ -52,6 +72,11 @@ public class CryptocurrencyCard {
         }
     }
     
+    /**
+     * Returns the value of the specified card type. If not valid, return -1
+     * @param cardName name of the card
+     * @return value of the card type
+     */
     public int getValue(String cardName) {
         switch (cardName) {
             case "Bitcoin": return 1;

@@ -20,13 +20,13 @@ public class CryptocurrencyGame {
         // Simulate game until all frameworks are gone
         int turnCount = 0;
         while (deck.getNumberFrameworkCards() > 0 && turnCount < 100) {
-            player1.buyPhase(deck);
+            turnCount++;
+            player1.buyPhase(deck, turnCount);
             player1.cleanUp();
             if (deck.getNumberFrameworkCards() <= 0) break;
             
-            player2.buyPhase(deck);
+            player2.buyPhase(deck, turnCount);
             player2.cleanUp();
-            turnCount++;
         }
         
         // Game should have ended
@@ -58,8 +58,8 @@ public class CryptocurrencyGame {
         Player player2 = new Player(2);
         Deck deck = new Deck();
         
-        String card1 = player1.buyPhase(deck);
-        String card2 = player2.buyPhase(deck);
+        String card1 = player1.buyPhase(deck, 1);
+        String card2 = player2.buyPhase(deck, 1);
         
         // Both should be able to buy
         assertNotNull(card1);

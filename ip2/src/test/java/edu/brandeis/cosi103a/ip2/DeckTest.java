@@ -98,31 +98,31 @@ public class DeckTest {
     
     @Test
     public void testGetBestAffordableCardWith2Coins() {
-        String best = deck.getBestAffordableCard(2);
+        String best = deck.getBestAffordableCard(2, 20);
         assertEquals("Method", best); // Only Method is affordable at 2 coins
     }
     
     @Test
     public void testGetBestAffordableCardWith5Coins() {
-        String best = deck.getBestAffordableCard(5);
+        String best = deck.getBestAffordableCard(5, 20);
         assertEquals("Module", best); // Module costs 5, best automation card
     }
     
     @Test
     public void testGetBestAffordableCardWith8Coins() {
-        String best = deck.getBestAffordableCard(8);
+        String best = deck.getBestAffordableCard(8, 20);
         assertEquals("Framework", best); // Framework costs 8, best automation card
     }
     
     @Test
     public void testGetBestAffordableCardWith0Coins() {
-        String best = deck.getBestAffordableCard(0);
+        String best = deck.getBestAffordableCard(0, 20);
         assertEquals("Bitcoin", best); // Bitcoin is free
     }
     
     @Test
     public void testGetBestAffordableCardWith4Coins() {
-        String best = deck.getBestAffordableCard(4);
+        String best = deck.getBestAffordableCard(4, 20);
         // Should get Method (2 coins) - automation cards are prioritized
         assertEquals("Method", best);
     }
@@ -130,7 +130,7 @@ public class DeckTest {
     @Test
     public void testGetBestAffordableCardPrioritizesAutomation() {
         // With 5 coins, should prefer Module over Ethereum/Dogecoin
-        String best = deck.getBestAffordableCard(5);
+        String best = deck.getBestAffordableCard(5, 20);
         assertEquals("Module", best);
     }
     
@@ -168,7 +168,7 @@ public class DeckTest {
         assertNull(card);
         
         // But getBestAffordableCard should still work for other cards
-        String best = deck.getBestAffordableCard(5);
+        String best = deck.getBestAffordableCard(5, 20);
         assertEquals("Module", best);
     }
 }
