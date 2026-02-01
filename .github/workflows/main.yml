@@ -1,0 +1,27 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up JDK 23 # (idea is to match pom.xml file)
+        uses: actions/setup-java@v3
+        with:
+          java-version: '23' # Specify your required version
+          distribution: 'microsoft'
+          cache: 'maven'
+          
+      - name: Build and run tests
+        run: mvn clean test 
+        working-directory: ./ip2 
