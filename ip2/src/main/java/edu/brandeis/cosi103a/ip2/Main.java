@@ -72,8 +72,8 @@ public class Main {
         int player1Points = player1.totalAutomationPoints();
         int player2Points = player2.totalAutomationPoints();
         
-        System.out.println("Player 1 total Automation Points (AP): " + player1Points);
-        System.out.println("Player 2 total Automation Points (AP): " + player2Points);
+        System.out.println("Player 1 total Automation Points: " + player1Points);
+        System.out.println("Player 2 total Automation Points: " + player2Points);
         
         if (player1Points > player2Points) {
             System.out.println("\nPlayer 1 wins!");
