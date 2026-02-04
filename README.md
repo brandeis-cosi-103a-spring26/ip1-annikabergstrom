@@ -6,3 +6,5 @@ Builds a dice game that
 * Once the player chooses to end their turn, the value of the die is added to their score
 * Each player should get 10 turns
 * At the end of the game, the player with the most points wins
+
+~~~
