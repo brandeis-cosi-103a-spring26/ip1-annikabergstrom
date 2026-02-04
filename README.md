@@ -8,3 +8,8 @@ Builds a dice game that
 * At the end of the game, the player with the most points wins
 
 ~~~
+
+# ip2-annikabergstrom
+Has a card game where players compete for the most automation points.
+Automation cards are bought with cryptocurrency cards. 
+This is a prototype for automation the game.
