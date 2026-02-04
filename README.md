@@ -10,3 +10,4 @@ Builds a dice game that
 # ip2-annikabergstrom
 Has a card game where players compete for the most automation points.
 Automation cards are bought with cryptocurrency cards. 
+This is a prototype for automation the game.
