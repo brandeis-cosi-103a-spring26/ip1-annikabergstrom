@@ -7,6 +7,8 @@ Builds a dice game that
 * Each player should get 10 turns
 * At the end of the game, the player with the most points wins
 
+~~~
+
 # ip2-annikabergstrom
 Has a card game where players compete for the most automation points.
 Automation cards are bought with cryptocurrency cards. 
